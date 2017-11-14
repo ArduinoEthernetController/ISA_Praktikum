@@ -11,25 +11,35 @@ import java.util.HashMap;
 import java.util.Stack;
 
 /**
- *
+ * Class CommnandInvoker stores a HashMap(Component, CommandInterface) and a Stack(CommandInterface)
  * @author Christoph
  */
 public class CommandInvoker
 {
   private HashMap<Component, CommandInterface> commands;
   public Stack<CommandInterface> undoStack;
-  
+
+/**
+ * Constructor
+ */  
   public CommandInvoker()
   {
     commands = new HashMap<>();
     undoStack = new Stack<>();
   }
-  
+  /**
+   * method adds the given Component and CommandInterface
+   * @param key - current Component 
+   * @param value - current CommandInterface
+   */
   public void addCommand(Component key, CommandInterface value)
   {
     commands.put(key, value);
   }
-  
+  /**
+   * mehthod pushes the relevant executed methods on the stack
+   * @param key - current Component
+   */
   public void executeCommand(Component key)
   {
     commands.get(key).execute();
@@ -40,7 +50,9 @@ public class CommandInvoker
       undoStack.push(commands.get(key));
     }
   }
-  
+  /**
+   * Method takes the last object (if available) of the undoStack and calls the undo method 
+   */
   public void undoCommand()
   {
     if(!undoStack.isEmpty())

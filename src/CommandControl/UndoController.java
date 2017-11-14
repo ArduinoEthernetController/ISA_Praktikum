@@ -12,7 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- *
+ * Class UndoController is the ActionListener for the undo botton
+ * 
  * @author Christoph
  */
 public class UndoController implements ActionListener
@@ -21,13 +22,22 @@ public class UndoController implements ActionListener
   private HexEditorModel model;
   private CommandInvoker invoker;
   
-  public UndoController(MainView view, HexEditorModel model, CommandInvoker invoker)
+  /**
+   * Constructor
+   * @param view - the Main View of the Application
+   * @param hexEditorModel - the Datamodel of the Applicaton
+   * @param invoker is to invoke the undoCommand
+   */
+  public UndoController(MainView view, HexEditorModel hexEditorModel, CommandInvoker invoker)
   {
     this.view = view;
-    this.model = model;
+    this.model = hexEditorModel;
     this.invoker = invoker;
   }
   
+  /**
+   *  Method registers all events to be listened for undo command
+   */
   public void registerEvents()
   {
     // Undo
@@ -36,10 +46,17 @@ public class UndoController implements ActionListener
     view.getPumUndo().addActionListener(this);
   }
 
+  /**
+   * Method registers all commands
+  */
   public void registerCommands()
   {
    //invoker.addCommand(view, value);
   }
+  /**
+   * Method overrides the actionPerformed method and calls the undoCommand 
+   * @param e current ActionEvent
+   */
   @Override
   public void actionPerformed(ActionEvent e)
   {

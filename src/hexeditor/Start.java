@@ -15,6 +15,7 @@ import javax.swing.UIManager;
 
 /**
  * Builder Class
+ *
  * @author Christoph
  */
 public class Start

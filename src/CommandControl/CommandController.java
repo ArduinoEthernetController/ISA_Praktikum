@@ -17,7 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- *
+ * Class CommandController implements all the functions to be listend by the Actionlistener
  * @author Christoph
  */
 public class CommandController implements ActionListener
@@ -26,13 +26,21 @@ public class CommandController implements ActionListener
   private HexEditorModel model;
   private CommandInvoker invoker;
   
-  public CommandController(MainView view, HexEditorModel model, CommandInvoker invoker)
+  /**
+   * Constructor 
+   * @param view - the Main View of the Application
+   * @param hexEditorModel - the Datamodel of the Applicaton
+   * @param invoker is to invoke the undoCommand 
+   */
+  public CommandController(MainView view, HexEditorModel hexEditorModel, CommandInvoker invoker)
   {
     this.view = view;
-    this.model = model;
+    this.model = hexEditorModel;
     this.invoker = invoker;
   }
-  
+  /**
+   *  Method registers all events to be listened for undo command
+   */
   public void registerEvents()
   {
     // Open
@@ -57,6 +65,9 @@ public class CommandController implements ActionListener
     
   }
 
+  /**
+   *  Method registers all commends to be registered by the CommandInvoker
+   */
   public void registerCommands()
   {
     // Open
@@ -79,6 +90,10 @@ public class CommandController implements ActionListener
     invoker.addCommand(view.getBtnDeleteLine(), new DeleteLineController (view, model));
     invoker.addCommand(view.getPumDeleteLine(), new DeleteLineController (view, model));    
   }
+  /**
+   * override Method overrides the actionPerformed method and calls the undoCommand 
+   * @param e current ActionEvent
+   */
   @Override
   public void actionPerformed(ActionEvent e)
   {

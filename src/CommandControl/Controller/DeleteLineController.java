@@ -13,6 +13,8 @@ import java.util.Stack;
 import javax.swing.text.BadLocationException;
 
 /**
+ * Class DeleteLineController implements the interface CommandInterface
+ * handles the actions of all elements which realize the deleteLine function of the application
  * 
  * @author Christoph
  * 
@@ -23,12 +25,21 @@ public class DeleteLineController implements CommandInterface
   private HexEditorModel hexEditorModel;
   private Stack<DeletedItem> deletedItemStack;
   
+  /**
+   * 
+   * @param view - the Main View of the Application
+   * @param hexEditorModel  - the Datamodel of the Applicaton
+   */
   public DeleteLineController(MainView view, HexEditorModel hexEditorModel)
   {
     this.view = view;
     this.hexEditorModel = hexEditorModel;
     this.deletedItemStack = new Stack<>();
   }
+  /**
+   * overrides of interface method execute
+   * Method execute deletes the marked line of the JTextArea
+   */
 
   @Override
   public void execute()
@@ -49,6 +60,10 @@ public class DeleteLineController implements CommandInterface
     }
   }
   
+  /**
+   * overrides of interface method undo
+   * Method undo get the deleted text and its position from the deletedItem-Stack and returns it to the TextArea
+   */
   @Override
   public void undo()
   { 
@@ -58,6 +73,10 @@ public class DeleteLineController implements CommandInterface
       view.getTaEditor().getTaEditor().insert(buff.getText(), buff.getPosition());
     }
   }
+  /**
+   * Method returns the current MainView
+   * @return the current MainView reference
+   */
 
   @Override
   public MainView getView()

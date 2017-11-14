@@ -8,7 +8,7 @@ package CommandControl;
 import View.MainView;
 
 /**
- *
+ * interface CommandInterface is for all kind command classes
  * @author Christoph
  */
 public interface CommandInterface
