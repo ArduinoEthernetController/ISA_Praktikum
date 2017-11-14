@@ -50,10 +50,12 @@ public class DeleteLineController implements CommandInterface
       int lineNumber = view.getTaEditor().getTaEditor().getLineOfOffset(caretOffset);
       int startOffset = view.getTaEditor().getTaEditor().getLineStartOffset(lineNumber);
       int endOffset = view.getTaEditor().getTaEditor().getLineEndOffset(lineNumber);
-      String taText = view.getTaEditor().getTaEditor().getText(startOffset, endOffset - startOffset);
-      view.getTaEditor().getTaEditor().replaceRange("",startOffset, endOffset);
       
-      deletedItemStack.push(new DeletedItem(startOffset, taText));
+      if(endOffset - startOffset > 0){
+        String taText = view.getTaEditor().getTaEditor().getText(startOffset, endOffset - startOffset);
+        view.getTaEditor().getTaEditor().replaceRange("",startOffset, endOffset);
+        deletedItemStack.push(new DeletedItem(startOffset, taText));
+      }
     }
     catch (BadLocationException ex)
     {
